@@ -1,0 +1,29 @@
+game order
+bet
+Deal
+    Dealt 5 cards
+Decision
+    discard one or more cards
+Deal
+CheckWinnings
+Reset
+    If player has money soft reset
+        Move to bet
+    If player does not have money Hard Reset entire game (optional instead of f5)
+
+
+VIDEO POKER HANDS
+TALLY BASED HANDS                       
+three of a kind
+four of a kind
+full house (three of a kind +pair)
+four of a kind
+flush
+
+SORT BASED HANDS
+straight
+
+
+COMBINATION OF TALLY AND SORT
+straight flush
+Royal flush
