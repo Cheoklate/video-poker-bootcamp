@@ -1,16 +1,12 @@
-// things to do
-// refactor code
 let state = "BUILD DECK";
-let playerWinCons = []
+let playerCurrency = 100;
+let bet = 0;
 const playerNames = [];
 const cardDeck = [];
-const playerCurrency = [];
-const playerCurrency = 0
-const playerBets = 0;
 const playerCards = [];
 
 
-let videopoker = () => {
+let videoPoker = (input) => {
   let makeDeck = function () {
     let suits = ["♥️", "♦", "♣️", "♠️"];
     let suitIndex = 0;
@@ -62,11 +58,15 @@ let videopoker = () => {
       currentIndex = currentIndex + 1;
     }
   };
-  let renderCards = () => { };
+  // let renderCards = () => { };
   let getHandValue = () => {
     let cardNameTally = {};
     let straightTally = 0;
-    let tallyWinCons = []
+    let winConsTally = []
+    let cardSuitTally = 0
+    let twoOfAKind = 0
+    let threeOfAKind = 0
+    let fourOfAKind = 0
 
     for (let i = 0; i < playerCards.length; i += 1) {
       let cardName = playerCards[i].value;
@@ -77,27 +77,60 @@ let videopoker = () => {
       }
     }
     for (let i = 0; i < playerCards.length; i++) {
-      if (playerCards[i].value += 1 = playerCards[i + 1].value) {
+      if (playerCards[i].value += 1 === playerCards[i + 1].value) {
         straightTally += 1
       }
     }
     for (let i = 0; i < cardNameTally.length; i++) {
       if (cardNameTally[i] >= 2) {
-        tallyWinCons.push(cardNameTally[i])
+        winConsTally.push(cardNameTally[i])
       }
     }
-    for (let i = 0; i < tallyWinCons.length; i++) {
-      if (tallyWinCons[i] === 2) {
-        playerWinCons.push(pair)
-      } if (tallyWinCons[i] === 3) {
-        playerWinCons.push(threeOfAKind)
-      } if (tallyWinCons[i] === 4) {
-        playerWinCons.push(fourOfAKind)
+    for (let i = 0; i < winConsTally.length; i++) {
+      if (winConsTally[i] === 2) {
+        twoOfAKind += 1
+      } if (winConsTally[i] === 3) {
+        threeOfAKind += 1
+      } if (winConsTally[i] === 4) {
+        fourOfAKind += 1
       }
     }
-    if (straightTally === 1) {
-
+    for (let i = 0; i < playerCards.length; i++) {
+      let cardSuit = playerCards[i].suit;
+      if (cardSuit in cardSuitTally) {
+        cardSuitTally[cardSuit] += 1;
+      } else {
+        cardSuitTally[cardSuit] = 1;
+      }
     }
+    if (twoOfAKind === 2) {
+      playerCurrency += bet * 2
+      return `Two Pairs! You win double your bet.`
+    } else if (straightTally === 1) {
+      playerCurrency += bet * 4
+      return `Straight! You win 4 times your bet.`
+    } else if (suitTally === 1) {
+      playerCurrency += bet * 5
+      return `Flush! You win 5 times your bet.`
+    } else if (twoOfAKind === 1 && threeOfAKind === 1) {
+      playerCurrency += bet * 8
+      return `Full House! You win 8 times your bet.`
+    } else if (fourOfAKind === 1) {
+      playerCurrency += bet * 25
+      return `Four of a kind. You win 25 times your bet.`
+    } else if (straightTally === 1 && suitTally === 1) {
+      playerCurrency += bet * 50
+      return `Straight Flush! You win 50 TIMES your bet. HOLLAH HOLLAH GET DOLLAH!!!`
+    } else if (straightTally === 1 && suitTally === 1 && playerCards[5].value === 13) {
+      playerCurrency += bet * 1000000
+      return `Sweet baby jesus, a Royal flush! You win 1,000,000 times your bet.`
+    } else if (twoOfAKind === 1) {
+      playerCurrency += bet * 1
+      return `Pair! You are returned your bet.`
+    } else if (threeOfAKind === 1) {
+      playerCurrency += bet * 3
+      return `Three of a kind! You win triple your bet.`
+    } else return `You got nothing. You lose sir. Good day. Click submit to move to the next stage.`
 
   };
 
@@ -108,10 +141,8 @@ let videopoker = () => {
     state = "PLACE BETS";
     return `Please input how much you would like to bet!`;
   } else if (state === "PLACE BETS") {
-    let bet = 0;
     bet = Number(input);
     playerCurrency -= bet;
-    playerBets += bet;
     state = "START";
     return `Please click Submit to deal the cards.`;
   } else if (state === "START") {
@@ -136,4 +167,7 @@ let videopoker = () => {
   } else if (state === "GET HAND VALUE") {
     getHandValue();
   }
+};
+var main = function (input) {
+  return videoPoker(input);
 };
