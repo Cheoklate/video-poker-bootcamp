@@ -1,6 +1,7 @@
 body {
 	display: flex;
 	justify-content: space-around;
+	flex-wrap: wrap;
 	align-content: center;
 	text-align: center;
 	background-color: rgb(37, 37, 246);
@@ -20,25 +21,52 @@ body {
 	flex-wrap: wrap;
 	flex-grow: 4;
 	background-color: rgb(2, 2, 138);
-	color: gold;
 	border: gold;
 	margin: 1rem;
 	border-style: solid;
 	text-align: right;
 }
+.currencyContainer {
+	display: inline-flex;
+	/* flex-direction: column; */
+	background-color: rgb(2, 2, 138);
+	color: gold;
+	margin: 1rem;
+	border: gold;
+	border-style: solid;
+	text-align: left;
+}
 .card {
 	display: inline-flex;
+	justify-content: space-between;
+	font-size: 200%;
 	width: 10rem;
 	height: 14rem;
-	background-color: white;
+	background-color: rgba(240, 240, 223, 0.747);
 	margin: 1rem;
 	border-radius: 0.5rem;
 	text-align: center;
 	cursor: pointer;
-	color: rgb(0, 0, 0);
 }
+.cardHold {
+	border: solid;
+	border-color: red;
+	display: inline-flex;
+	justify-content: space-between;
+	font-size: 200%;
+	width: 10rem;
+	height: 14rem;
+	background-color: rgba(240, 240, 223, 0.747);
+	margin: 1rem;
+	border-radius: 0.5rem;
+	text-align: center;
+	cursor: pointer;
+	filter: brightness(130%);
+}
+
 .cardback {
 	display: inline-flex;
+	justify-content: flex-start;
 	width: 10rem;
 	height: 14rem;
 	background-image: url('VisualAssets/back.png');
@@ -48,17 +76,16 @@ body {
 	border-radius: 0.5rem;
 	text-align: center;
 	cursor: pointer;
-	color: rgb(0, 0, 0);
 }
 .card:hover {
-	filter: brightness(110%);
+	filter: brightness(140%);
 	transform: translateY(-2px);
 	transition: transform 34ms;
 }
-.card.red {
+.red {
 	color: red;
 }
-.card.black {
+.black {
 	color: black;
 }
 .card-topleft {
@@ -67,9 +94,8 @@ body {
 	left: 0.75em;
 }
 .card-bottomright {
-	position: absolute;
-	bottom: 0.5em;
-	right: 0.75em;
+	display: inline-flex;
+	justify-self: end;
 	transform: rotate(180deg);
 }
 .card-corner-rank,
