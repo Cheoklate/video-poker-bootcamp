@@ -1,0 +1,80 @@
+body {
+	display: flex;
+	justify-content: space-around;
+	align-content: center;
+	text-align: center;
+	background-color: rgb(37, 37, 246);
+}
+.REWARD_TABLE {
+	display: inline-flex;
+	flex-grow: 4;
+	background-color: rgb(2, 2, 138);
+	color: gold;
+	margin: 1rem;
+	border: gold;
+	border-style: solid;
+	text-align: left;
+}
+#cardContainer {
+	display: inline-flex;
+	flex-wrap: wrap;
+	flex-grow: 4;
+	background-color: rgb(2, 2, 138);
+	color: gold;
+	border: gold;
+	margin: 1rem;
+	border-style: solid;
+	text-align: right;
+}
+.card {
+	display: inline-flex;
+	width: 10rem;
+	height: 14rem;
+	background-color: white;
+	margin: 1rem;
+	border-radius: 0.5rem;
+	text-align: center;
+	cursor: pointer;
+	color: rgb(0, 0, 0);
+}
+.cardback {
+	display: inline-flex;
+	width: 10rem;
+	height: 14rem;
+	background-image: url('VisualAssets/back.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin: 1rem;
+	border-radius: 0.5rem;
+	text-align: center;
+	cursor: pointer;
+	color: rgb(0, 0, 0);
+}
+.card:hover {
+	filter: brightness(110%);
+	transform: translateY(-2px);
+	transition: transform 34ms;
+}
+.card.red {
+	color: red;
+}
+.card.black {
+	color: black;
+}
+.card-topleft {
+	position: absolute;
+	top: 0.5em;
+	left: 0.75em;
+}
+.card-bottomright {
+	position: absolute;
+	bottom: 0.5em;
+	right: 0.75em;
+	transform: rotate(180deg);
+}
+.card-corner-rank,
+.card-corner-suit {
+	width: 1em;
+	text-align: center;
+	transform: translate(-50%, 0);
+}
