@@ -1,12 +1,11 @@
-let state = "BUILD DECK";
+let state = 'BUILD DECK';
 let playerCurrency = 100;
 let bet = 0;
 let cardDeck = [];
 let playerCards = [];
 
-
 let makeDeck = function () {
-  let suits = ["♥️", "♦", "♣️", "♠️"];
+  let suits = ['♥️', '♦', '♣️', '♠️'];
   let suitIndex = 0;
 
   while (suitIndex < suits.length) {
@@ -17,16 +16,16 @@ let makeDeck = function () {
       let cardName = rankCounter;
       let cardValue = rankCounter;
       if (cardName == 1) {
-        cardName = "A";
+        cardName = 'A';
         cardValue = 1;
       } else if (cardName == 11) {
-        cardName = "J";
+        cardName = 'J';
         cardValue = 10;
       } else if (cardName == 12) {
-        cardName = "Q";
+        cardName = 'Q';
         cardValue = 11;
       } else if (cardName == 13) {
-        cardName = "K";
+        cardName = 'K';
         cardValue = 12;
       }
       let card = {
@@ -56,15 +55,14 @@ let shuffleCards = function (cardDeck) {
     currentIndex = currentIndex + 1;
   }
 };
-// let renderCards = () => { };
+let holdCards = () => { };
 let getHandValue = () => {
   let cardNameTally = {};
   let straightTally = 0;
-  let suitTally = {}
-  let twoOfAKind = 0
-  let threeOfAKind = 0
-  let fourOfAKind = 0
-  debugger
+  let suitTally = {};
+  let twoOfAKind = 0;
+  let threeOfAKind = 0;
+  let fourOfAKind = 0;
 
   for (let i = 0; i < playerCards.length; i += 1) {
     let cardName = playerCards[i].value;
@@ -75,17 +73,19 @@ let getHandValue = () => {
     }
   }
   for (let i = 0; i < playerCards.length - 1; i++) {
-    if (playerCards[i].value += 1 === playerCards[i + 1].value) {
-      straightTally += 1
+    if ((playerCards[i].value += 1 === playerCards[i + 1].value)) {
+      straightTally += 1;
     }
   }
   for (cardName in cardNameTally) {
     if (cardNameTally[cardName] === 2) {
-      twoOfAKind += 1
-    } if (cardNameTally[cardName] === 3) {
-      threeOfAKind += 1
-    } if (cardNameTally[cardName] === 4) {
-      fourOfAKind += 1
+      twoOfAKind += 1;
+    }
+    if (cardNameTally[cardName] === 3) {
+      threeOfAKind += 1;
+    }
+    if (cardNameTally[cardName] === 4) {
+      fourOfAKind += 1;
     }
   }
   for (let i = 0; i < playerCards.length; i++) {
@@ -97,69 +97,82 @@ let getHandValue = () => {
     }
   }
   if (twoOfAKind === 2) {
-    playerCurrency += bet * 2
-    return `Two Pairs! You win double your bet.`
+    playerCurrency += bet * 2;
+    return `Two Pairs! You win double your bet.`;
   } else if (straightTally === 1) {
-    playerCurrency += bet * 4
-    return `Straight! You win 4 times your bet.`
+    playerCurrency += bet * 4;
+    return `Straight! You win 4 times your bet.`;
   } else if (suitTally === 1) {
-    playerCurrency += bet * 5
-    return `Flush! You win 5 times your bet.`
+    playerCurrency += bet * 5;
+    return `Flush! You win 5 times your bet.`;
   } else if (twoOfAKind === 1 && threeOfAKind === 1) {
-    playerCurrency += bet * 8
-    return `Full House! You win 8 times your bet.`
+    playerCurrency += bet * 8;
+    return `Full House! You win 8 times your bet.`;
   } else if (fourOfAKind === 1) {
-    playerCurrency += bet * 25
-    return `Four of a kind. You win 25 times your bet.`
+    playerCurrency += bet * 25;
+    return `Four of a kind. You win 25 times your bet.`;
   } else if (straightTally === 1 && suitTally[cardSuit] === 5) {
-    playerCurrency += bet * 50
-    return `Straight Flush! You win 50 TIMES your bet. HOLLAH HOLLAH GET DOLLAH!!!`
-  } else if (straightTally === 1 && suitTally[cardSuit] === 5 && playerCards[5].value === 13) {
-    playerCurrency += bet * 1000000
-    return `Sweet baby jesus, a Royal flush! You win 1,000,000 times your bet.`
+    playerCurrency += bet * 50;
+    return `Straight Flush! You win 50 TIMES your bet. HOLLAH HOLLAH GET DOLLAH!!!`;
+  } else if (
+    straightTally === 1 &&
+    suitTally[cardSuit] === 5 &&
+    playerCards[5].value === 13
+  ) {
+    playerCurrency += bet * 1000000;
+    return `Sweet baby jesus, a Royal flush! You win 1,000,000 times your bet.`;
   } else if (twoOfAKind === 1) {
-    playerCurrency += bet * 1
-    return `Pair! You are returned your bet.`
+    playerCurrency += bet * 1;
+    return `Pair! You are returned your bet.`;
   } else if (threeOfAKind === 1) {
-    playerCurrency += bet * 3
-    return `Three of a kind! You win triple your bet.`
-  }
-  else return `You got nothing. You lose sir. Good day. Click submit to move to the next stage.`
+    playerCurrency += bet * 3;
+    return `Three of a kind! You win triple your bet.`;
+  } else
+    return `You got nothing. You lose sir. Good day. Click submit to move to the next stage.`;
 };
 
 // Game logic
 let videoPoker = (input) => {
-  if (state === "BUILD DECK") {
+  if (state === 'BUILD DECK') {
     makeDeck();
     shuffleCards(cardDeck);
-    state = "PLACE BETS";
+    state = 'PLACE BETS';
     return `Please input how much you would like to bet!`;
-  } else if (state === "PLACE BETS") {
+  } else if (state === 'PLACE BETS') {
     bet = Number(input);
     playerCurrency -= bet;
-    state = "START";
+    state = 'START';
     return `Please click Submit to deal the cards.`;
-  } else if (state === "START") {
+  } else if (state === 'START') {
     for (let i = 0; i < 5; i++) {
       playerCards.push(cardDeck.pop());
+      let HTMLCard = document.getElementsByClassName('card-back');
+      // HTMLCard.innerHTML = `${hand[i].name}${hand[i].suitSymbol}`;
+      HTMLCard.classList.remove("card-back");
+      HTMLCard.classList.add('card');
+      HTMLCard.setAttribute('id', `card-${i}`);
+      cardContainer.appendChild(HTMLCard);
+      // if (hand[i].suit === 'diamonds' || hand[i].suit === 'hearts') {
+      //   HTMLCard.classList.add('red');
+      // }
+      // HTMLCard.addEventListener('click', () => { discardCardSelect(i); });
     }
 
-    state = "OPTION";
+    state = 'OPTION';
     return `Select the cards you wish to discard.`;
-  } else if (state === "OPTION") {
-    state = "REDEAL";
+  } else if (state === 'OPTION') {
+    state = 'REDEAL';
     return `Click submit to confirm your discards and get new cards.`;
-  } else if (state === "REDEAL") {
+  } else if (state === 'REDEAL') {
     for (let i = playerCards.length; i < 5; i++) {
       playerCards.push(cardDeck.pop());
     }
     playerCards.sort(function (a, b) {
       return a.value - b.value;
     });
-    state = "GET HAND VALUE";
+    state = 'GET HAND VALUE';
     return `Click submit to calculate your winnings.`;
-  } else if (state === "GET HAND VALUE") {
-
+  } else if (state === 'GET HAND VALUE') {
     return `${getHandValue(playerCards)}`;
   }
 };
