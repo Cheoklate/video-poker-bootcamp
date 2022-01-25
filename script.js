@@ -144,20 +144,15 @@ let videoPoker = (input) => {
     state = 'START';
     return `Please click Submit to deal the cards.`;
   } else if (state === 'START') {
+    var HTMLCard = document.getElementsByClassName('cardback');
     for (let i = 0; i < 5; i++) {
+      debugger
       playerCards.push(cardDeck.pop());
-      let HTMLCard = document.getElementsByClassName('card-back');
-      // HTMLCard.innerHTML = `${hand[i].name}${hand[i].suitSymbol}`;
-      HTMLCard.classList.remove("card-back");
-      HTMLCard.classList.add('card');
-      HTMLCard.setAttribute('id', `card-${i}`);
-      cardContainer.appendChild(HTMLCard);
-      // if (hand[i].suit === 'diamonds' || hand[i].suit === 'hearts') {
-      //   HTMLCard.classList.add('red');
-      // }
-      // HTMLCard.addEventListener('click', () => { discardCardSelect(i); });
+      HTMLCard[i].classList.add('card');
+      HTMLCard[i].classList.remove(`cardback`);
+      HTMLCard[i].setAttribute('id', `card${i}`);
+      console.log(HTMLCard)
     }
-
     state = 'OPTION';
     return `Select the cards you wish to discard.`;
   } else if (state === 'OPTION') {
